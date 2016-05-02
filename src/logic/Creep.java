@@ -6,21 +6,24 @@ import render.RenderManager;
 
 public class Creep extends SpaceObject{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int speed;
 
 	public Creep(int x,int y,int speed){
 		super(x, y);
 		this.speed = speed;
 		this.z = -100;
-		this.setShipHeight(115);
-		this.setShipWidth(60);
-		this.radius = 30;
+		this.setShipHeight(100);
+		this.setShipWidth(10);
 	}
 	
-	public void onCollision(Player tank){
-		tank.hitByMine();
+	public void onCollision(Player player){
+		player.isCrash();
 		RenderManager.explosionSound.play();
-		this.destroyed = true;
+		//this.destroyed = true;
 	}
 	
 	@Override

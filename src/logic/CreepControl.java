@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.Random;
 
+import render.RenderManager;
+
 public class CreepControl {
 	
 	private ArrayList<SpaceObject> creepList;
@@ -23,7 +25,8 @@ public class CreepControl {
 		Creep creep = new Creep(640, 50,3);
 		creep.setY(random.nextInt(380-creep.getShipHeight()));
 		creepList.add(creep);
-		GameLogic.getInstance().addNewObject(creep);
+		//GameLogic.getInstance().addNewObject(creep);
+		RenderManager.getInstance().add(creep);
 		timeToSpawn = random.nextInt(100)+100;
 		}
 		timeToSpawn--;

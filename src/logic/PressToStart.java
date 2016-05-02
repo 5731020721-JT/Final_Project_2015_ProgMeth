@@ -8,16 +8,12 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
+
 import javax.swing.JPanel;
 
-import input.InputUtility;
+
 import logic.Player;
-import render.GameScreen;
-import render.RenderManager;
 import shell.ShellControl;
-import logic.GameLogic;;
 
 
 public class PressToStart extends JPanel implements Runnable{

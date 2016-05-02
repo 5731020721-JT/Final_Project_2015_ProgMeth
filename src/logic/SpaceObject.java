@@ -18,10 +18,18 @@ public abstract class SpaceObject extends JPanel implements IRenderable {
 	protected boolean visible;
 
 
-	public boolean destroyed;
+	protected boolean destroyed;
 	
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
+	}
+
 	private int shipHeight;
 	private int shipWidth;
+
+
+	private Player player;
+	private Creep creeps;
 	
 	//constructor
 	public SpaceObject(int x,int y){
@@ -81,16 +89,12 @@ public abstract class SpaceObject extends JPanel implements IRenderable {
 
 
 	public abstract void move();
-	/*
-	public boolean isCollids(SpaceObject sp){
-		return(x < sp.getX()+ sp.getShipWidth()
-				&& x + sp.shipWidth > sp.getX()
-				&& y < sp.getY() + sp.getShipHeight()
-				&& y + shipHeight > sp.getY() );
-	}*/
 	
 	protected boolean collideWith(SpaceObject other){
-		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
+		
+		return (other.getY()+other.getShipHeight()>=this.y && other.getY()<=this.y+this.getShipHeight() 
+		&& other.x<=this.x+this.getShipWidth() && other.x+other.getShipWidth()>=this.x);
+		
 	}
 	
 	@Override

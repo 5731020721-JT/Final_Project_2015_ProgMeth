@@ -1,12 +1,10 @@
 import input.InputUtility;
 
-import java.awt.Dimension;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import logic.GameLogic;
-import logic.PressToStart;
 import render.GameScreen;
 import render.RenderManager;
 

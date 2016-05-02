@@ -18,6 +18,8 @@ public class Shell extends SpaceObject {
 	public Shell(int x, int y, int speed) {
 		super(x, y);
 		this.speed = speed;
+		this.setShipHeight(10);
+		this.setShipWidth(30);
 	}
 
 

@@ -3,7 +3,6 @@ package logic;
 import input.InputUtility;
 import render.RenderManager;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
@@ -25,14 +24,14 @@ public class Player extends SpaceObject{
 	private int flashDurationCounter = 0;
 	private static int score=0;
 	
-	private long delay = 500 ;
+	private long delay = 1000 ;
 	private long timeLastShot = 0;
 	
 	public Player(int x, int y){
 		super(x,y);
 		this.radius = 80;
-		this.setShipHeight(160);
-		this.setShipWidth(140);
+		this.setShipHeight(110);
+		this.setShipWidth(100);
 	}
 	
 	public void forward(){
@@ -65,7 +64,7 @@ public class Player extends SpaceObject{
 		Player.score = score;
 	}
 
-	public void hitByMine(){
+	public void isCrash(){
 		flashing = true;
 		flashCounter = 10;
 		flashDurationCounter = 10;
@@ -110,9 +109,9 @@ public class Player extends SpaceObject{
 	@Override
 	public void draw(Graphics2D g2d) {
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-		tx.translate(-RenderManager.heroPicture.getSubimage(0, 0, 160, 160).getHeight(null),0);
+		tx.translate(-RenderManager.heroPicture.getHeight(null),0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		BufferedImage img = op.filter(RenderManager.heroPicture.getSubimage(0, 0, 160, 160), null);
+		BufferedImage img = op.filter(RenderManager.heroPicture, null);
 		g2d.drawImage(img, null,x,y);	
 
 	
