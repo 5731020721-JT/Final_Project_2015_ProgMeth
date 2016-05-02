@@ -28,10 +28,7 @@ public class PressToStart extends JPanel implements Runnable{
 	public static int WIDTH = 800;
 	public static int HEIGHT = 600;
 	private Thread th;
-	private boolean isRun;
-	private long delay = 40 ;
-	private long timeLastShot = 0;
-	private JPanel currentScene;
+	private boolean isRun = false;
 	
     public PressToStart() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
@@ -49,33 +46,6 @@ public class PressToStart extends JPanel implements Runnable{
 				if(key==KeyEvent.VK_SPACE){
 					startGame();
 				}
-				
-				
-				
-				switch (e.getKeyChar()) {
-				case '6':
-					player.forward();
-					break;
-				case '8':
-					player.up();
-					break;
-				case '5':
-					player.down();
-					break;
-				case '4':
-					player.backward();
-					break;
-				case 'k':
-					if(System.currentTimeMillis()-timeLastShot >= delay){
-					shellControl.addShell();
-					timeLastShot = System.currentTimeMillis();
-					}
-					break;		
-
-				default:
-					break;
-				}
-				
 				
 			}
 
@@ -129,7 +99,7 @@ public class PressToStart extends JPanel implements Runnable{
 			g.drawString("Please Press Spacebar to Start Game", WIDTH/2-130, HEIGHT/2+25);
 		}
 		else{
-			//new GameLogic(null);
+			//GameLogic.getInstance().startTimer();
 			
 			
 		}

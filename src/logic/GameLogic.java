@@ -19,9 +19,12 @@ import logic.SpaceObject;
 import logic.PressToStart;
 
 public class GameLogic  extends JFrame implements KeyListener  {
+	
 
-	private RenderManager renderableContainer;
+	private static RenderManager renderableContainer;
 	private List<SpaceObject> gameObjectContainer;
+	
+	private static final GameLogic Instance = new GameLogic();
 	
 	private Random random;
 	private Timer timing ;
@@ -37,25 +40,26 @@ public class GameLogic  extends JFrame implements KeyListener  {
 	//private Player player;
 	private PressToStart pressToStart;
 	
-	public GameLogic(RenderManager renderableContainer){
-		this.renderableContainer = renderableContainer;
+	public GameLogic(){
+		//this.renderableContainer = renderableContainer;
+		
 		this.gameObjectContainer = new ArrayList<SpaceObject>();
 		pressToStart = new PressToStart();
 		Field field = new Field();
 		enemyList=new ArrayList<>();
 		 shellList= new ArrayList<>();
 		 hero = new Player(10,100);
-		 creeps = new Creep(640,100,3);
+		 creeps = new Creep(640,100,2);
 		random = new Random();
 		creepControl = new CreepControl(enemyList, random);
 		shellControl = new ShellControl(shellList,hero);
-		renderableContainer.add(field);
+		RenderManager.getInstance().add(field);
 		
 		enemyList.add(creeps);
 		
 		addNewObject(hero);
 		addNewObject(creeps);
-		startTimer();
+	//	startTimer();
 		
 		
 	}
@@ -66,7 +70,7 @@ public class GameLogic  extends JFrame implements KeyListener  {
 
 	public void addNewObject(SpaceObject entity){
 		gameObjectContainer.add(entity);
-		renderableContainer.add(entity);
+		RenderManager.getInstance().add(entity);
 	}
 	
 	public void logicUpdate(){
@@ -86,13 +90,14 @@ public class GameLogic  extends JFrame implements KeyListener  {
 				removeObjectWithColl();
 				GameLogic.this.repaint();
 				creepControl.update();
-			/*	if(!creepControl.update() || isCollidsWithPlayer()){
+				if(isCollidsWithPlayer()){
 					timing.stop();
 					JOptionPane.showMessageDialog(null, "GAME OVER  :(");
+					hero.destroyed = true;
 					pressToStart.stop();
-				}*/
+				}
 				
-				//creepControl.updateCreeps();
+			//	creepControl.updateCreeps();
 				creepControl.createCreeps();
 				shellControl.update();
 				
@@ -128,11 +133,13 @@ public class GameLogic  extends JFrame implements KeyListener  {
 	
 	
 	
-	public void removeObjectWithColl(){
+	public synchronized void removeObjectWithColl(){
 		for (int i = 0 ; i < enemyList.size();i++){
 			for(int j = 0 ; j < shellList.size();j++){
 				if(enemyList.get(i).collideWith(shellList.get(j))){
+					enemyList.get(i).destroyed = true;
 					enemyList.remove(i);
+					shellList.get(i).destroyed = true;
 					shellList.remove(j);
 				}
 			}
@@ -149,6 +156,14 @@ public class GameLogic  extends JFrame implements KeyListener  {
 			}
 		return false;
 		
+	}
+
+	public static GameLogic getInstance() {
+		return Instance;
+	}
+
+	public ShellControl getShellControl() {
+		return shellControl;
 	}
 	
 	

@@ -8,7 +8,10 @@ import logic.SpaceObject;
 
 public class ShellControl {
 	
+	
 	private ArrayList<SpaceObject> shellList;
+	
+	
 	
 	private Player player;
 	int timeToSpawn = 0;
@@ -19,10 +22,11 @@ public class ShellControl {
 	}
 	
 	
-	public void addShell(){
-		Shell shells = new Shell(2, player.getX()+player.getShipWidth(), 3);
+	public synchronized void addShell(){
+		Shell shells = new Shell(player.getX()+player.getShipWidth(), player.getY()+player.getShipHeight()/2, 3);
 		shells.setY((player.getY()+player.getShipHeight()/2)- shells.getShipHeight()/2);		
 		shellList.add(shells);
+		GameLogic.getInstance().addNewObject(shells);
 	}
 	
 	
@@ -30,7 +34,7 @@ public class ShellControl {
 	public void update(){
 		for(int i = 0 ; i < shellList.size();i++){
 			if(shellList.get(i).getX() > GameLogic.WIDTH){
-				shellList.remove(i);
+				//shellList.get(i).destroyed = true;
 			}
 			else{
 				shellList.get(i).move();

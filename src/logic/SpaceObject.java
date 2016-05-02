@@ -15,7 +15,10 @@ public abstract class SpaceObject extends JPanel implements IRenderable {
 	protected int y;
 	protected int z;
 	protected int radius;
-	protected boolean visible,destroyed;
+	protected boolean visible;
+
+
+	public boolean destroyed;
 	
 	private int shipHeight;
 	private int shipWidth;

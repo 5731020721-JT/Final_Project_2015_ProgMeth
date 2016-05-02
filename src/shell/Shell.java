@@ -3,6 +3,7 @@ package shell;
 import java.awt.Graphics2D;
 
 import logic.SpaceObject;
+import render.RenderManager;
 
 public class Shell extends SpaceObject {
 	
@@ -31,7 +32,8 @@ public class Shell extends SpaceObject {
 	@Override
 	public void draw(Graphics2D g2d) {
 		// TODO Auto-generated method stub
-		
+		g2d.drawImage(RenderManager.bulletPicture.getSubimage(0, 0, 64, 64), null, x, y);	
+
 	}
 
 }

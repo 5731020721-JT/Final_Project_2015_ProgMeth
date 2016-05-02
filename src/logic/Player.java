@@ -17,31 +17,42 @@ public class Player extends SpaceObject{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final int speed = 4  ;
-	//private int angle = 0; //angle 0 = EAST
+	
+	
 	
 	private boolean flashing = false;
 	private int flashCounter = 0;
 	private int flashDurationCounter = 0;
 	private static int score=0;
 	
+	private long delay = 500 ;
+	private long timeLastShot = 0;
+	
 	public Player(int x, int y){
 		super(x,y);
-		this.radius = 20;
+		this.radius = 80;
+		this.setShipHeight(160);
+		this.setShipWidth(140);
 	}
 	
 	public void forward(){
+		if(x<=640-this.getShipWidth())
 		this.x += speed-2;
+		
 	}
 	
 	public void backward(){
+		if(x>0)
 		this.x -= speed-2;
 	}
 	
 	public void up(){
+		if(y>-10)
 		this.y -= speed;
 	}
 	
 	public void down(){
+		if(y<=380-this.getShipHeight())
 		this.y += speed;
 	}
 	
@@ -82,15 +93,17 @@ public class Player extends SpaceObject{
 			up();
 			//forward();
 		}
-		else if(InputUtility.getKeyPressed(KeyEvent.VK_A)){
+		if(InputUtility.getKeyPressed(KeyEvent.VK_A)){
 			backward();
-		}else if(InputUtility.getKeyPressed(KeyEvent.VK_D)){
+		} if(InputUtility.getKeyPressed(KeyEvent.VK_D)){
 			forward();
-		}else if(InputUtility.getKeyPressed(KeyEvent.VK_S)){
+		} if(InputUtility.getKeyPressed(KeyEvent.VK_S)){
 			down();
-		}if(InputUtility.isLeftClickTriggered()){
-			this.x = InputUtility.mouseX;
-			this.y = InputUtility.mouseY;
+		} if(InputUtility.getKeyPressed(KeyEvent.VK_ENTER)){
+			if(System.currentTimeMillis()-timeLastShot >= delay){
+				GameLogic.getInstance().getShellControl().addShell();
+				timeLastShot = System.currentTimeMillis();
+			}
 		}
 	}
 	

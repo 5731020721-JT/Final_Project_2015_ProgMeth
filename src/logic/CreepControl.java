@@ -19,8 +19,14 @@ public class CreepControl {
 	
 	
 	public void createCreeps(){
+		if (timeToSpawn <= 0) {
 		Creep creep = new Creep(640, 50,3);
+		creep.setY(random.nextInt(380-creep.getShipHeight()));
 		creepList.add(creep);
+		GameLogic.getInstance().addNewObject(creep);
+		timeToSpawn = random.nextInt(100)+100;
+		}
+		timeToSpawn--;
 	}
 	
 	
@@ -28,16 +34,16 @@ public class CreepControl {
 
 	public void updateCreeps() {
 		if (timeToSpawn <= 0) {
-			Creep creep = new Creep(640, 50,3);
-			creep.setY(random.nextInt(380 - creep.getShipHeight()));
-			
+			Creep creep = new Creep(640, 50,new Random().nextInt(3));
+			creep.setY(random.nextInt(380-creep.getShipHeight()));
+			GameLogic.getInstance().addNewObject(creep);
 			if (creepList.isEmpty()) {
 				creepList.add(creep);
 			} else {
 				boolean collids;
 				do {
 					collids = false;
-					creep.setY(random.nextInt(640-creep.getShipHeight()));
+					creep.setY(random.nextInt(640));
 					
 					for (SpaceObject sp : creepList) {
 						if (creep.collideWith(sp)) {
@@ -49,22 +55,24 @@ public class CreepControl {
 			}
 			timeToSpawn = random.nextInt(100)+100;
 			creepList.add(creep);
+		//GameLogic.getInstance().addNewObject(creep);
 		}
 		timeToSpawn--;
 	}
 	
 	
 	
-	public boolean update(){
+	public void update(){
 		for(int i = 0 ; i < creepList.size();i++){
-			//if(creepList.get(i).getX()<=0){
-			//	return false;
-		//	}
-		//	else{
-				creepList.get(i).move();
-		//	}
+			if(creepList.get(i).getX()<=-70){
+			//เพิ่มคะแนน ของผู้เล่น
+			creepList.get(i).destroyed = true;
 		}
-		return true;
+			else{
+				creepList.get(i).move();
+		}
+		}
+		
 	}
 	
 	

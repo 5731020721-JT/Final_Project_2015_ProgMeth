@@ -17,12 +17,12 @@ public class Main {
 		JFrame frame = new JFrame("SPACE IMPACT");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		RenderManager renderManager = new RenderManager();
-		GameLogic logic = new GameLogic(renderManager);
-		JComponent gameScreen = new GameScreen(renderManager);
+	//	RenderManager renderManager = new RenderManager();
+	//	GameLogic logic = new GameLogic();
+		JComponent gameScreen = new GameScreen(RenderManager.getInstance());
 		
 		
-		frame.add(logic.getPressToStart());
+		frame.add(GameLogic.getInstance().getPressToStart());
 		frame.setVisible(true);
 		frame.pack();
 		while(true){
@@ -31,12 +31,13 @@ public class Main {
 			} catch (InterruptedException e) {
 			}
 			
-		if(logic.getPressToStart().isRun())	{
+		if(GameLogic.getInstance().getPressToStart().isRun())	{
 		
 		
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(gameScreen);
 	
+		GameLogic.getInstance().startTimer();
 		
 		frame.getContentPane().setVisible(true);
 		frame.pack();
@@ -52,7 +53,7 @@ public class Main {
 			} catch (InterruptedException e) {
 			}
 			gameScreen.repaint();
-			logic.logicUpdate();
+			GameLogic.getInstance().logicUpdate();
 			//logic.startTimer();
 			InputUtility.updateInputState();
 		}

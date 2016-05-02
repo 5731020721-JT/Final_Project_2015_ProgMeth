@@ -14,21 +14,30 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import logic.GameLogic;
+
 public class RenderManager {
 
 	public static BufferedImage mapSpace;
 	public static BufferedImage enemyPicture;
 	public static BufferedImage heroPicture;
+	public static BufferedImage bulletPicture;
 	public static AudioClip explosionSound;
+	
+	private static final RenderManager Instance = new RenderManager();
+	
 	static{
 		try {
 			ClassLoader loader = RenderManager.class.getClassLoader();
 			mapSpace = ImageIO.read(loader.getResource("space.png"));
 			enemyPicture = ImageIO.read(loader.getResource("enemy.png"));
 			heroPicture = ImageIO.read(loader.getResource("monkey.png"));
+			bulletPicture = ImageIO.read(loader.getResource("bullet.png"));
 			explosionSound = Applet.newAudioClip((loader.getResource("Explosion.wav")).toURI().toURL());
 		} catch (Exception e) {
 			mapSpace = null;
+			bulletPicture = null;
+			heroPicture = null;
 			enemyPicture = null;
 			explosionSound = null;
 		}
@@ -69,5 +78,9 @@ public class RenderManager {
 				entity.draw(g2d);
 			}
 		}
+	}
+
+	public static RenderManager getInstance() {
+		return Instance;
 	}
 }

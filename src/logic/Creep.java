@@ -12,7 +12,9 @@ public class Creep extends SpaceObject{
 		super(x, y);
 		this.speed = speed;
 		this.z = -100;
-		//this.radius = 20;
+		this.setShipHeight(150);
+		this.setShipWidth(70);
+		this.radius = 30;
 	}
 	
 	public void onCollision(Player tank){
