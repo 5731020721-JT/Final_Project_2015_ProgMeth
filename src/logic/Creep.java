@@ -12,8 +12,8 @@ public class Creep extends SpaceObject{
 		super(x, y);
 		this.speed = speed;
 		this.z = -100;
-		this.setShipHeight(150);
-		this.setShipWidth(70);
+		this.setShipHeight(115);
+		this.setShipWidth(60);
 		this.radius = 30;
 	}
 	
@@ -25,7 +25,7 @@ public class Creep extends SpaceObject{
 	
 	@Override
 	public void draw(Graphics2D g2d) {
-		g2d.drawImage(RenderManager.enemyPicture.getSubimage(0, 0, 70, 150), null, x, y);	
+		g2d.drawImage(RenderManager.enemyPicture1, null, x, y);	
 	}
 	
 

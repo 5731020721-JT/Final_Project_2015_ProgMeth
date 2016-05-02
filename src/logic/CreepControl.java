@@ -30,8 +30,7 @@ public class CreepControl {
 	}
 	
 	
-	
-
+	/*
 	public void updateCreeps() {
 		if (timeToSpawn <= 0) {
 			Creep creep = new Creep(640, 50,new Random().nextInt(3));
@@ -59,6 +58,7 @@ public class CreepControl {
 		}
 		timeToSpawn--;
 	}
+	*/
 	
 	
 	

@@ -20,6 +20,7 @@ public class RenderManager {
 
 	public static BufferedImage mapSpace;
 	public static BufferedImage enemyPicture;
+	public static BufferedImage enemyPicture1;
 	public static BufferedImage heroPicture;
 	public static BufferedImage bulletPicture;
 	public static AudioClip explosionSound;
@@ -31,6 +32,7 @@ public class RenderManager {
 			ClassLoader loader = RenderManager.class.getClassLoader();
 			mapSpace = ImageIO.read(loader.getResource("space.png"));
 			enemyPicture = ImageIO.read(loader.getResource("enemy.png"));
+			enemyPicture1 = ImageIO.read(loader.getResource("enemy1.png"));
 			heroPicture = ImageIO.read(loader.getResource("monkey.png"));
 			bulletPicture = ImageIO.read(loader.getResource("bullet.png"));
 			explosionSound = Applet.newAudioClip((loader.getResource("Explosion.wav")).toURI().toURL());
