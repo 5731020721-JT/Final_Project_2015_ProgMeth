@@ -93,6 +93,7 @@ public abstract class SpaceObject extends JPanel implements IRenderable {
 	@Override
 	public boolean isDestroyed(){
 		return destroyed;
+	
 	}
 	
 	@Override

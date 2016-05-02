@@ -16,10 +16,19 @@ public class CreepControl {
 		this.random = random;
 
 	}
+	
+	
+	public void createCreeps(){
+		Creep creep = new Creep(640, 50,3);
+		creepList.add(creep);
+	}
+	
+	
+	
 
 	public void updateCreeps() {
 		if (timeToSpawn <= 0) {
-			Creep creep = new Creep(640, 0,3);
+			Creep creep = new Creep(640, 50,3);
 			creep.setY(random.nextInt(380 - creep.getShipHeight()));
 			
 			if (creepList.isEmpty()) {
@@ -29,6 +38,7 @@ public class CreepControl {
 				do {
 					collids = false;
 					creep.setY(random.nextInt(640-creep.getShipHeight()));
+					
 					for (SpaceObject sp : creepList) {
 						if (creep.collideWith(sp)) {
 							collids = true;
@@ -47,12 +57,12 @@ public class CreepControl {
 	
 	public boolean update(){
 		for(int i = 0 ; i < creepList.size();i++){
-			if(creepList.get(i).getX()<=0){
-				return false;
-			}
-			else{
+			//if(creepList.get(i).getX()<=0){
+			//	return false;
+		//	}
+		//	else{
 				creepList.get(i).move();
-			}
+		//	}
 		}
 		return true;
 	}
